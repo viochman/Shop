@@ -1,0 +1,20 @@
+﻿@{ 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@Model.CurrentCategory</h2>
+@{
+    foreach (var product in Model.Products)
+    {
+        <div class="col-sm-3 col-lg-3 col-md-3">
+            <div class="img-thumbnail">
+                <img src="@product.ImageThumbnailUrl" alt=""/>
+                <div class="figure-caption">
+                    <h3 class="pull-right">@product.Price.ToString()</h3>
+                    <h3>@product.ProductName</h3>
+                    <p>@product.ShortDescription</p>
+                </div>
+            </div>
+        </div>        
+    }
+}
