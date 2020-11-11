@@ -20,29 +20,31 @@ namespace Shop.Data.Models
         public List<ShoppingCartItem> ShoppingCartItems { get; set; }
         public static ShoppingCart GetCart(IServiceProvider services)
         {
-            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            ISession session = services.GetRequiredService<IHttpContextAccessor>()?
+                .HttpContext.Session;
             var context = services.GetService<AppDbContext>();
             string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
             session.SetString("CartId", cartId);
             return new ShoppingCart(context) { ShoppingCartId = cartId };
         }
+
         public void AddToCart(Product product, int amount)
         {
-            var shopingCartItem = 
+            var shoppingCartItem = 
                 _appDbContext.ShoppingCartItems.SingleOrDefault(s => s.Product.ProductId == product.ProductId && s.ShoppingCartId == ShoppingCartId) ;
-            if(shopingCartItem == null)
+            if(shoppingCartItem == null)
             {
-                shopingCartItem = new ShoppingCartItem
+                shoppingCartItem = new ShoppingCartItem
                 {
                     ShoppingCartId = ShoppingCartId,
                     Product = product,
                     Amount = 1
                 };
-                _appDbContext.ShoppingCartItems.Add(shopingCartItem);
+                _appDbContext.ShoppingCartItems.Add(shoppingCartItem);
             }
             else
             {
-                shopingCartItem.Amount++;
+                shoppingCartItem.Amount++;
             }
             _appDbContext.SaveChanges();
         }

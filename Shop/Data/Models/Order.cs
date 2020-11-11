@@ -34,10 +34,15 @@ namespace Shop.Data.Models
 
         [Required(ErrorMessage = "Please enter your zip code")]
         [Display(Name = "Zip code")]
-        [StringLength(10, MinimumLength = 4)]
+        [StringLength(6, MinimumLength = 5)]
         public string ZipCode { get; set; }
 
-        [StringLength(10)]
+        [Required(ErrorMessage = "Please enter your city")]
+        [Display(Name = "City")]
+        [StringLength(20, MinimumLength = 3)]
+        public string City{ get; set; }
+
+        [StringLength(20)]
         public string State { get; set; }
 
         [Required(ErrorMessage = "Please enter your country")]

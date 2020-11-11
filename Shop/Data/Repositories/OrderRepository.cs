@@ -20,7 +20,11 @@ namespace Shop.Data.Repositories
         public void CreateOrder(Order order)
         {
             order.OrderPlaced = DateTime.Now;
+
             _appDbContext.Orders.Add(order);
+            //tego brakowało.
+            _appDbContext.SaveChanges();
+
 
             var shoppingCartItems = _shoppingCart.ShoppingCartItems;
             foreach(var item in shoppingCartItems)
