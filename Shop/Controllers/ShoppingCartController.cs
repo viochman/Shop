@@ -30,7 +30,7 @@ namespace Shop.Controllers
             };
             return View(sCVM);
         }
-        public RedirectToActionResult AddShoppingCart(int productId)
+        public RedirectToActionResult AddToShoppingCart(int productId)
         {
             var selectedProduct = _productRepository.Products.FirstOrDefault(p => p.ProductId == productId);
             if(selectedProduct != null)
