@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Shop.Data;
 
 namespace Shop.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201111102043_ShopCardItem")]
+    partial class ShopCardItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,9 +80,9 @@ namespace Shop.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("Shop.Data.Models.ShoppingCartItem", b =>
+            modelBuilder.Entity("Shop.Data.Models.ShoppinCartItem", b =>
                 {
-                    b.Property<int>("ShoppingCartItemId")
+                    b.Property<int>("ShoppinCartItemId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -94,11 +96,11 @@ namespace Shop.Migrations
                     b.Property<string>("ShoppingCartId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ShoppingCartItemId");
+                    b.HasKey("ShoppinCartItemId");
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("ShoppingCartItems");
+                    b.ToTable("ShoppinCartItems");
                 });
 
             modelBuilder.Entity("Shop.Data.Models.Product", b =>
@@ -110,7 +112,7 @@ namespace Shop.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Shop.Data.Models.ShoppingCartItem", b =>
+            modelBuilder.Entity("Shop.Data.Models.ShoppinCartItem", b =>
                 {
                     b.HasOne("Shop.Data.Models.Product", "Product")
                         .WithMany()
