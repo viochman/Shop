@@ -8,7 +8,7 @@ namespace Shop.Data.Models
 {
     public class Category
     {
-        public int CatwgoryId { get; set; }
+        public int CategoryId { get; set; }
 
         public string CategoryName { get; set; }
 

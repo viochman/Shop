@@ -12,6 +12,7 @@ using Microsoft.Extensions.Hosting;
 using Shop.Data;
 using Shop.Data.Interfaces;
 using Shop.Data.Mocks;
+using Shop.Data.Models;
 using Shop.Data.Repositories;
 
 namespace Shop
@@ -64,6 +65,8 @@ namespace Shop
             {
                 endpoints.MapDefaultControllerRoute();
             });
+
+            
         }
     }
 }
