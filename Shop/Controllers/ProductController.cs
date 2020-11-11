@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Data.Interfaces;
+using Shop.Data.Models;
 using Shop.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -19,15 +20,34 @@ namespace Shop.Controllers
             _categoryRepository = categoryRepository;
             _productRepository = productRepository;
         }
-        public ViewResult List()
+        public ViewResult List(string category)
         {
-            ViewBag.Name = ".Net, how are you";
-            ProductListViewModel vm = new ProductListViewModel();
-            vm.Products = _productRepository.Products;
-            vm.CurrentCategory = "Product category";
-
-
-            return View(vm);
+            string _category = category;
+            IEnumerable<Product> products;
+            string currentCategory = string.Empty;
+            if(string.IsNullOrEmpty(category))
+            {
+                products = _productRepository.Products.OrderBy(n => n.ProductId);
+                currentCategory = "All products";
+            }
+            else 
+            {
+                if(string.Equals("Alcoholic", _category, StringComparison.OrdinalIgnoreCase))
+                {
+                    products = _productRepository.Products.Where(p => p.Category.CategoryName.Equals("Alcoholic"));
+                }
+                else
+                {
+                    products = _productRepository.Products.Where(p => p.Category.CategoryName.Equals("Non-alcoholic"));
+                }
+                currentCategory = _category;
+            }
+            var productListViewModel = new ProductListViewModel
+            {
+                Products = products,
+                CurrentCategory = currentCategory
+            };
+            return View(productListViewModel);
         }
     }
 }

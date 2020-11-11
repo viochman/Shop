@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -68,12 +69,23 @@ namespace Shop
             app.UseAuthorization();
 
             app.UseSession();
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapDefaultControllerRoute();
+            //});
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultControllerRoute();
+            endpoints.MapControllerRoute(
+                name: "categoryFilter",
+                pattern: "Product/{action}/{category?}",
+                defaults: new { Controller = "Product"}
+                );
+            endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
             });
-
-            
         }
     }
 }
