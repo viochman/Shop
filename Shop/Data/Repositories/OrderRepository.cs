@@ -23,7 +23,7 @@ namespace Shop.Data.Repositories
 
             _appDbContext.Orders.Add(order);
             //tego brakowało.
-            _appDbContext.SaveChanges();
+            //_appDbContext.SaveChanges();
 
 
             var shoppingCartItems = _shoppingCart.ShoppingCartItems;
@@ -33,12 +33,15 @@ namespace Shop.Data.Repositories
                 {
                     Amount = item.Amount,
                     ProductId = item.Product.ProductId,
-                    OrderId = order.OrderId,
+                    //OrderId = order.OrderId,
                     Price = item.Product.Price
+                    
                 };
 
-                _appDbContext.OrderDetails.Add(orderDetail);
-            }
+                order.OrderLines.Add(orderDetail);
+                //_appDbContext.OrderDetails.Add(orderDetail);
+
+        }
             _appDbContext.SaveChanges();
         }
         

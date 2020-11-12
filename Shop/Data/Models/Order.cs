@@ -69,5 +69,6 @@ namespace Shop.Data.Models
         [BindNever]
         [ScaffoldColumn(false)]
         public DateTime OrderPlaced { get; set; }
+        
     }
 }
